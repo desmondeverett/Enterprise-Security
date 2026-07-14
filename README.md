@@ -19,7 +19,7 @@ A multi-phase enterprise security lab featuring an isolated Windows 11 target an
 
 ![Hyper-V Virtual Switch Manager showing 'ET-Sandbox' Private Network](Screenshots/ET-Sandbox.png)
 
-![Windows 11 Desktop post-installation (Local Account)](Screenshots/Windows%2011%20Desktop%20post-installation%20(Local%20Account).png)
+![Windows 11 Desktop post-installation (Local Account)](Screenshots/ET-Win11-Target-Desktop.png)
 
 ## 🏢 Phase 2: Active Directory Integration
 
