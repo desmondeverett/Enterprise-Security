@@ -4,7 +4,7 @@ A multi-phase enterprise security lab featuring an isolated Windows 11 target an
 
 ## 🧪 Phase 1: Windows 11 Sandbox Provisioning
 
-*Status:* In Progress 🟡
+*Status:* Completed 🟢
 
 ## 🎯 Phase 1 Objectives
 
@@ -12,12 +12,14 @@ A multi-phase enterprise security lab featuring an isolated Windows 11 target an
 - [x] Provision a new Hyper-V Virtual Machine (Generation 2) tailored for Windows 11 minimum requirements.
 - [x] Configure an isolated "Sandbox" Private Virtual Switch in Hyper-V to prevent accidental network leaks.
 - [x] Ensure vTPM and Secure Boot are enabled on the VM hardware for Windows 11 compliance.
-- [ ] Install Windows 11 using the offline local account bypass (OOBE\BYPASSNRO).
-- [ ] Establish a clean "Baseline" checkpoint before introducing any tools or threats.
+- [x] Install Windows 11 using the offline local account bypass (OOBE\BYPASSNRO).
+- [x] Establish a clean "Baseline" checkpoint before introducing any tools or threats.
 
-*📸 Screenshot Placeholders:*
-[Insert Screenshot: Hyper-V Virtual Switch Manager showing 'ET-Sandbox' Private Network] 
-[Insert Screenshot: Windows 11 Desktop post-installation (Local Account)]
+*📸 Screenshots:*
+
+![Hyper-V Virtual Switch Manager showing 'ET-Sandbox' Private Network](Screenshots/ET-Sandbox.png)
+
+![Windows 11 Desktop post-installation (Local Account)](Screenshots/Windows%2011%20Desktop%20post-installation%20(Local%20Account).png)
 
 ## 🏢 Phase 2: Active Directory Integration
 
