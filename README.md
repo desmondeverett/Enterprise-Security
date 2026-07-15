@@ -1,84 +1,74 @@
-# Enterprise Security & Threat Hunting Lab
+# Enterprise-Security
 
-A multi-phase enterprise security lab featuring an isolated Windows 11 target and an Active Directory Domain Controller for threat hunting, telemetry generation, and policy deployment.
+Deployment documentation and standard operating procedures (SOPs) for the enterprise security infrastructure, featuring isolated endpoint provisioning, Active Directory integration, SIEM telemetry generation, and active threat hunting for Everett Technologies.
 
-## 🧪 Phase 1: Windows 11 Sandbox Provisioning
+## 🛠️ Infrastructure Topology & Deployment Roadmap
 
-*Status:* Completed 🟢
+## ✅ Phase 1: Windows 11 Sandbox Provisioning
+- **Status:** ✅ Completed
+- **Documentation:** View Phase 1 SOP
+- **Description:** Provisioning an isolated Hyper-V Virtual Machine (Generation 2) tailored for Windows 11, enforcing vTPM and Secure Boot compliance, and establishing a secure baseline environment on a Private Virtual Switch.
 
-## 🎯 Phase 1 Objectives
+### 📸 Phase 1 Quality Assurance (QA) Validation
 
-- [x] Standardize the Windows 11 ISO naming convention.
-- [x] Provision a new Hyper-V Virtual Machine (Generation 2) tailored for Windows 11 minimum requirements.
-- [x] Configure an isolated "Sandbox" Private Virtual Switch in Hyper-V to prevent accidental network leaks.
-- [x] Ensure vTPM and Secure Boot are enabled on the VM hardware for Windows 11 compliance.
-- [x] Install Windows 11 using the offline local account bypass (OOBE\BYPASSNRO).
-- [x] Establish a clean "Baseline" checkpoint before introducing any tools or threats.
+*1. Hyper-V Private Virtual Switch Configuration*
+![Virtual Switch Configuration](Screenshots/ET-Sandbox.png)
 
-*📸 Screenshots:*
+*2. Windows 11 Baseline Provisioning*
+![Windows 11 Desktop](Screenshots/ET-Win11-Target-Desktop.png)
 
-![Hyper-V Virtual Switch Manager showing 'ET-Sandbox' Private Network](Screenshots/ET-Sandbox.png)
+## ✅ Phase 2: Active Directory Integration
+- **Status:** ✅ Completed
+- **Documentation:** View Phase 2 SOP
+- **Description:** Connecting the Windows Server Domain Controller (`ET-DC01`), configuring static IP addressing, joining the endpoint to the Active Directory domain, and deploying baseline Group Policy Objects (GPOs).
 
-![Windows 11 Desktop post-installation (Local Account)](Screenshots/ET-Win11-Target-Desktop.png)
+### 📸 Phase 2 Quality Assurance (QA) Validation
 
-## 🏢 Phase 2: Active Directory Integration
-
-*Status:* Completed 🟢
-
-## 🎯 Phase 2 Objectives
-
-- [x] Power on ET-DC01 (Windows Server) and connect it to the ET-Sandbox Private Virtual Switch.
-- [x] Configure static IP addressing for both ET-DC01 and ET-Win11-Target.
-- [x] Join ET-Win11-Target to the local Active Directory domain.
-- [x] Create test Organizational Units (OUs) and Domain User accounts.
-- [x] Deploy a Group Policy Object (GPO) to the Windows 11 target (e.g., setting baseline security policies or disabling Defender for testing).
-
-*📸 Screenshots:*
-
+*1. Domain Controller Server Rename*
 ![DC01 Server Rename](Screenshots/DC01-Server-Name.png)
 
+*2. Static IP Address Configuration*
 ![DC01 Static IP Address](Screenshots/DC01-IPAddressing.png)
 
+*3. Windows 11 Domain Integration*
 ![Windows 11 Domain Join](Screenshots/Win11-Domain-Join.png)
 
-![Active Directory Users and Computers (ADUC)](Screenshots/AD-Users-Computers-ADUC.png)
+*4. Active Directory Users and Computers (ADUC)*
+![ADUC Configuration](Screenshots/AD-Users-Computers-ADUC.png)
 
-![GPO Baseline Warning Banner](Screenshots/GPO-Banner.png)
-## 🛡️ Phase 3: Telemetry & Log Forwarding
+*5. GPO Baseline Policy Enforcement*
+![GPO Baseline Banner](Screenshots/GPO-Banner.png)
 
-*Status:* Pending 🔴
+## 🔴 Phase 3: Telemetry & Log Forwarding
+- **Status:** 🔴 Pending
+- **Documentation:** View Phase 3 SOP
+- **Description:** Deploying Sysmon (enterprise configuration) and the Splunk Universal Forwarder to the target endpoint to ensure continuous telemetry ingestion and Windows Event Log forwarding.
 
-## 🎯 Phase 3 Objectives
+### 📸 Phase 3 Quality Assurance (QA) Validation
 
-- [ ] Install Sysmon on ET-Win11-Target using an enterprise configuration (e.g., SwiftOnSecurity).
-- [ ] Install Splunk Universal Forwarder on ET-Win11-Target.
-- [ ] Configure the Forwarder to send Windows Event Logs and Sysmon telemetry to the Splunk instance.
-- [ ] Verify log ingestion and indexing.
+*1. Sysmon Service Verification*
+*[Insert Screenshot: Sysmon service running in Windows Services]*
 
-*📸 Screenshot Placeholders:*
-[Insert Screenshot: Sysmon service running in Windows Services] 
-[Insert Screenshot: Splunk search head verifying ingestion of logs from ET-Win11-Target]
+*2. Splunk Log Ingestion Validation*
+*[Insert Screenshot: Splunk search head verifying ingestion of logs from ET-Win11-Target]*
 
-## ⚔️ Phase 4: Threat Simulation & Detection
+## 🔴 Phase 4: Threat Simulation & Detection
+- **Status:** 🔴 Pending
+- **Documentation:** View Phase 4 SOP
+- **Description:** Simulating adversarial brute-force attacks and executing PowerShell payloads to validate endpoint telemetry and hunt for malicious indicators using Splunk Processing Language (SPL).
 
-*Status:* Pending 🔴
+### 📸 Phase 4 Quality Assurance (QA) Validation
 
-## 🎯 Phase 4 Objectives
+*1. Simulated Attack Payload Execution*
+*[Insert Screenshot: Execution of the simulated attack payload in PowerShell]*
 
-- [ ] Simulate a Brute Force authentication attack against the Domain Controller.
-- [ ] Execute basic PowerShell-based payloads on the Windows 11 target.
-- [ ] Utilize Splunk Search Processing Language (SPL) to hunt for Event IDs related to process creation and registry modifications.
-- [ ] Document findings and map to the MITRE ATT&CK framework.
+*2. Threat Detection & SPL Validation*
+*[Insert Screenshot: Splunk dashboard highlighting the detected malicious activity]*
 
-*📸 Screenshot Placeholders:*
-[Insert Screenshot: Execution of the simulated attack payload in PowerShell] 
-[Insert Screenshot: Splunk dashboard highlighting the detected malicious activity]
+## ⚠️ Technical Challenges & Resolutions
 
-## 🧠 Lessons Learned & Troubleshooting
+* **Hypervisor Compatibility & VBS Conflicts:** During initial provisioning on a Windows 11 Home host via VirtualBox, severe EFI boot sequence failures occurred. **Resolution:** Identified that native Virtualization-Based Security (VBS) and Core Isolation features locked the hardware. Upgraded the host environment to Windows 11 Pro and migrated the entire architecture to Microsoft Hyper-V. This resolved nested virtualization conflicts, natively supported Windows 11 requirements (vTPM/Secure Boot), and provided a stable, enterprise-grade Private Virtual Switch.
 
-### The Pivot from VirtualBox to Hyper-V
-The initial architecture for this lab utilized VirtualBox on a Windows 11 Home host. During the provisioning of the Windows 11 target, severe EFI boot sequence hangs (black screens) and hypervisor conflicts occurred. 
-
-**Root Cause:** Windows 11 Home runs hidden Virtualization-Based Security (VBS) and Core Isolation features that lock the virtualization hardware, forcing VirtualBox into a buggy compatibility mode (often called the "Green Turtle" issue). Furthermore, VirtualBox's graphics/storage controllers struggled to render the WinPE environment for modern Windows 11 ISOs.
-
-**Resolution:** Instead of disabling native Windows security features (Registry/BCD edits) to force VirtualBox to work, the host machine was upgraded to **Windows 11 Pro**. This unlocked Microsoft's native **Hyper-V** hypervisor. Moving the entire lab to Hyper-V resolves the nested virtualization conflicts, securely supports Windows 11 VMs natively, and allows for a more stable, enterprise-grade Private Virtual Switch to route traffic between the Target, DC, and SIEM.
+## 📁 Repository Directory Structure
+- **/SOPs** — Step-by-step deployment documentation, threat hunting guides, and configuration files.
+- **/Screenshots** — Visual QA validation of successful domain joins, telemetry mapping, and threat detection.
