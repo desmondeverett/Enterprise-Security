@@ -23,20 +23,27 @@ A multi-phase enterprise security lab featuring an isolated Windows 11 target an
 
 ## 🏢 Phase 2: Active Directory Integration
 
-*Status:* Pending 🔴
+*Status:* Completed 🟢
 
 ## 🎯 Phase 2 Objectives
 
-- [ ] Power on ET-DC01 (Windows Server) and connect it to the ET-Sandbox Private Virtual Switch.
-- [ ] Configure static IP addressing for both ET-DC01 and ET-Win11-Target.
-- [ ] Join ET-Win11-Target to the local Active Directory domain.
-- [ ] Create test Organizational Units (OUs) and Domain User accounts.
-- [ ] Deploy a Group Policy Object (GPO) to the Windows 11 target (e.g., setting baseline security policies or disabling Defender for testing).
+- [x] Power on ET-DC01 (Windows Server) and connect it to the ET-Sandbox Private Virtual Switch.
+- [x] Configure static IP addressing for both ET-DC01 and ET-Win11-Target.
+- [x] Join ET-Win11-Target to the local Active Directory domain.
+- [x] Create test Organizational Units (OUs) and Domain User accounts.
+- [x] Deploy a Group Policy Object (GPO) to the Windows 11 target (e.g., setting baseline security policies or disabling Defender for testing).
 
-*📸 Screenshot Placeholders:*
-[Insert Screenshot: Windows 11 System Properties showing successful Domain Join] 
-[Insert Screenshot: Active Directory Users and Computers (ADUC) showing the new ET-Win11-Target machine]
+*📸 Screenshots:*
 
+![DC01 Server Rename](Screenshots/DC01-Server-Name.png)
+
+![DC01 Static IP Address](Screenshots/DC01-IPAddressing.png)
+
+![Windows 11 Domain Join](Screenshots/Win11-Domain-Join.png)
+
+![Active Directory Users and Computers (ADUC)](Screenshots/AD-Users-Computers-ADUC.png)
+
+![GPO Baseline Warning Banner](Screenshots/GPO-Banner.png)
 ## 🛡️ Phase 3: Telemetry & Log Forwarding
 
 *Status:* Pending 🔴
